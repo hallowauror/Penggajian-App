@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PositionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,13 @@ Route::post('/login', [LoginController::class, 'authenticate']);
 Route::middleware(['auth'])->group(function () {
     Route::post('/logout', [LoginController::class, 'logout']);
     Route::get('/dashboard', [DashboardController::class, 'index']);
+
+    // Route Position
+    Route::get('/position/{position}/delete', [PositionController::class, 'delete']);
+    Route::resource('position', PositionController::class)->only([
+       'index', 'store', 'update', 'edit'
+    ]);
+    
 });
 
 

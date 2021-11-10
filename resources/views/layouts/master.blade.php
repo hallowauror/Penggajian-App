@@ -18,7 +18,13 @@
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="{{ asset('assets/css/sb-admin-2.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('assets/css/sb-admin-2.min.css')}} " rel="stylesheet">
+    <link href="{{ asset('assets/vendor/datatables/dataTables.bootstrap4.min.css')}} " rel="stylesheet">
+
+    {{-- Toastr CSS --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+    @yield('css')
 
 </head>
 
@@ -92,6 +98,32 @@
 
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('assets/js/sb-admin-2.min.js')}} "></script>
+
+    <!-- Page level plugins -->
+    <script src="{{ asset('assets/vendor/datatables/jquery.dataTables.min.js')}} "></script>
+    <script src="{{ asset('assets/vendor/datatables/dataTables.bootstrap4.min.js')}} "></script>
+
+    <!-- Page level custom scripts -->
+    <script src="{{ asset('assets/js/demo/datatables-demo.js')}} "></script>
+
+    {{-- SweetAlert --}}
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    {{-- Toastr JS --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <script type="application/javascript">
+        @if (Session::has('sukses'))
+            toastr.success("{{Session::get('sukses')}}", "Berhasil!")
+        @endif
+
+        @if (Session::has('gagal'))
+            toastr.error("{{Session::get('gagal')}}", "Gagal!")
+        @endif
+    </script>
+
+
+    @yield('js')
 
 
 </body>
