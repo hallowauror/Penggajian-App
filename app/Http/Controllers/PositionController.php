@@ -11,7 +11,7 @@ class PositionController extends Controller
     public function index()
     {
         return view('positions.index', [
-            'position' => Position::all()
+            'position' => Position::all()->sortBy('jabatan'),
         ]);
     }
 

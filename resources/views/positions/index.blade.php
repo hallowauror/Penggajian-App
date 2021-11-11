@@ -8,14 +8,24 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Manajemen Data Jabatan</h1>
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#positionModal">
-                <i class="fas fa-plus fa-sm text-white-50"></i>
-                Tambah Data Pegawai
-            </button>
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Manajemen Data Jabatan</h1>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#positionModal">
+            <i class="fas fa-plus fa-sm text-white-50"></i>
+            Tambah Data Jabatan
+        </button>
+    </div>
+
+    @if($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{$error}}</li>
+                @endforeach
+            </ul>
         </div>
+    @endif
 
   <!-- Modal Tambah Data-->
   <div class="modal fade" id="positionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

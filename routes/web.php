@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PositionController;
+use App\Http\Controllers\EmployeeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,13 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('position', PositionController::class)->only([
        'index', 'store', 'update', 'edit'
     ]);
+
+    // Route Employee
+    Route::get('/employee/{employee}/delete', [EmployeeController::class, 'delete']);
+    Route::resource('employee', EmployeeController::class)->only([
+        'index', 'store', 'update', 'edit', 'show'
+     ]);
+     
     
 });
 

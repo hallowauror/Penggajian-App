@@ -4,18 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Position;
-use App\Models\Employee;
 
-class Position extends Model
+use App\Models\Position;
+
+class Employee extends Model
 {
     use HasFactory;
 
     protected $guarded = [];
 
-    public function employees()
+    public function position()
     {
-        return $this->hasMany(Employee::class);
+        return $this->belongsTo(Position::class);
     }
-
 }
