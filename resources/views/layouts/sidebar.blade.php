@@ -37,7 +37,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="/employee">Data Pegawai</a>
                 <a class="collapse-item" href="/position">Data Jabatan</a>
-                <a class="collapse-item" href="#">Data Kehadiran</a>
+                <a class="collapse-item" href="/presence">Data Kehadiran</a>
             </div>
         </div>
     </li>

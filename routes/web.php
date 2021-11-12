@@ -5,6 +5,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\PresenceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,12 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('employee', EmployeeController::class)->only([
         'index', 'store', 'update', 'edit', 'show'
      ]);
+
+   // Route Presence
+   Route::get('/presence/{presence}/delete', [PresenceController::class, 'delete']);
+   Route::resource('presence', PresenceController::class)->only([
+      'index', 'store', 'update', 'edit', 'show'
+   ]);
      
     
 });

@@ -76,7 +76,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup </button>
                         <button type="submit" class="btn btn-primary">Tambah</button>
                     </div>
                 </form>
@@ -117,7 +117,7 @@
                             <td>{{ $e->nama }}</td>
                             <td>{{ $e->position->jabatan }}</td>
                             <td>
-                                <a href="#" class="btn btn-info" data-toggle="modal" data-target="#modalShow" data-id="{{ $e->id }}">
+                                <a href="#" class="btn btn-info" data-toggle="modal" data-target="#modalShow{{$e->id}}" data-id="{{ $e->id }}">
                                     <span class="icon text-white-100">
                                         <i class="fas fa-info"></i>
                                     </span>
@@ -137,7 +137,7 @@
                             </td>
 
                             <!-- Modal Show Data-->
-                            <div class="modal fade bd-example-modal-lg" id="modalShow" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                            <div class="modal fade bd-example-modal-lg" id="modalShow{{$e->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-lg" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -182,7 +182,7 @@
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                                             </div>
                                         </form>
                                     </div>
@@ -238,12 +238,13 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="">Foto Pegawai</label>
+                                                        <p class="text-danger">Abaikan jika tidak ingin mengganti foto.</p>
                                                         <input type="hidden" name="oldFoto" value="{{ $e->foto }}">
                                                         <input type="file" name="foto" class="form-control-file">
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                                                 <button type="submit" class="btn btn-primary">Ubah</button>
                                             </div>
                                         </form>

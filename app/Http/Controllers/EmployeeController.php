@@ -19,16 +19,13 @@ class EmployeeController extends Controller
 
     public function show($employee)
     {
-        $pegawai = Employee::firstOrFail($employee);
-
         return view('employee.index', [
-            'pegawai' => $pegawai
+            'employee' => Employee::findOrFail($employee)
         ]);
     }
 
     public function store(Request $request)
     {
-        // ddd($request->all());
         $this->validate($request, [
             'nik' => 'required|digits:16|unique:employees',
             'nama' => 'required',
