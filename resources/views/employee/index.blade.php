@@ -114,8 +114,8 @@
                                 @endif
                             </td>
                             <td>{{ $e->nik }}</td>
-                            <td>{{ $e->nama }}</td>
-                            <td>{{ $e->position->jabatan }}</td>
+                            <td>{{ ucFirst($e->nama) }}</td>
+                            <td>{{ ucFirst($e->position->jabatan) }}</td>
                             <td>
                                 <a href="#" class="btn btn-info" data-toggle="modal" data-target="#modalShow{{$e->id}}" data-id="{{ $e->id }}">
                                     <span class="icon text-white-100">

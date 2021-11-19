@@ -33,7 +33,7 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Tambah Data Pegawai</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">Tambah Data Kehadiran</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -46,21 +46,21 @@
                                 <select name="employee_id" id="employee_id" class="form-control" required>
                                     <option value="">-- Pilih Pegawai --</option>
                                     @foreach ($employee as $e)
-                                        <option value="{{ $e->id }}">{{ ucFirst($e->nama) }}</option>
+                                        <option value="{{ $e->id }}" data-gaji="{{$e->position->gaji_pokok}}" data-tunjangan="{{$e->position->tunjangan}}">{{ ucFirst($e->nama) }}</option>
                                     @endforeach
                                 </select>
                         </div>
                         <div class="form-group">
                             <label class="">Kehadiran</label>
-                                <input type="number" min="0" max="31" name="hadir" placeholder="Jumlah Hadir" class="form-control" required>
+                                <input type="number" min="0" max="31" id="hadir" name="hadir" placeholder="Jumlah Hadir" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label class="">Lebih Jam Mengajar (Jam)</label>
-                                <input type="number" min="0" name="lebih_jam" placeholder="Lebih Jam Mengajar" class="form-control" required>
+                                <input type="number" min="0" name="lebih_jam" id="lebih_jam" placeholder="Lebih Jam Mengajar" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label class="">Insentif Kehadiran</label>
-                                <input type="number" min="0" max="31" name="insentif" placeholder="Insentif Kehadiran" class="form-control" required>
+                                <input type="number" min="0" max="31" name="insentif" id="insentif" placeholder="Insentif Kehadiran" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label class="">Periode</label>
@@ -96,7 +96,7 @@
                         @foreach ($presence as $pre)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $pre->employee->nama }}</td>
+                            <td>{{ ucFirst($pre->employee->nama) }}</td>
                             <td>{{ $pre->periode->format('F - Y') }}</td>
                             <td>
                                 <a href="#" class="btn btn-info" data-toggle="modal" data-target="#modalShow{{$pre->id}}" data-id="{{ $pre->id }}">
@@ -185,9 +185,9 @@
                                                         <select name="employee_id" id="employee_id" class="form-control" required>
                                                             @foreach ($employee as $e)
                                                                 @if (old('employee_id', $pre->employee_id) == $e->id)
-                                                                    <option value="{{ $e->id }}" selected>{{ ucFirst($e->nama) }}</option>
+                                                                    <option value="{{ $e->id }}" data-gaji="{{$e->position->gaji_pokok}}" data-tunjangan="{{$e->position->tunjangan}}"  selected>{{ ucFirst($e->nama) }}</option>
                                                                 @else
-                                                                <option value="{{ $e->id }}">{{ ucFirst($e->nama) }}</option>
+                                                                <option value="{{ $e->id }}" data-gaji="{{$e->position->gaji_pokok}}" data-tunjangan="{{$e->position->tunjangan}}">{{ ucFirst($e->nama) }}</option>
                                                                 @endif
                                                             @endforeach
                                                         </select>
@@ -247,5 +247,15 @@
             }
             });
         });
+
+        // $('#employee_id, #hadir, #lebih_jam, #insentif').on("paste keyup change", function (){
+        //     var gaji = $(this).find(":selected").data("gaji");
+        //     var tunjangan = $(this).find(":selected").data("tunjangan");
+        //     var hasil = parseInt($("#hadir").val() * 40000) + parseInt($("#lebih_jam").val() * 10000) + parseInt($("#insentif").val() * 10000);
+        //     var total_gaji = parseInt(gaji) +  parseInt(tunjangan) + hasil;
+        //     $("#total_gaji").val((isNaN(total_gaji) ? '' : total_gaji));
+        // });
+        
+
     </script>
 @endsection

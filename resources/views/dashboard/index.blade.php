@@ -88,5 +88,18 @@
         </div>
     </div>
 
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card shadow mb-4">
+                <div class="card-header">
+                    <h3 class="pt-3">SDIT Nuur 'Alaa Nuur</h3>
+                </div>
+                <div class="card-body">
+                    <img src="{{ asset('assets/img/Gedung.jpg')}}" alt="Logo" class="img-fluid" style="width: 100%; height: 50%">
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 @endsection

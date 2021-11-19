@@ -7,6 +7,7 @@ use App\Http\Controllers\PositionController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\PresenceController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -46,8 +47,9 @@ Route::middleware(['auth'])->group(function () {
    Route::resource('presence', PresenceController::class)->only([
       'index', 'store', 'update', 'edit', 'show'
    ]);
-     
-    
+
+   Route::get('/payroll', [PresenceController::class, 'payroll']);
+   
 });
 
 
