@@ -29,6 +29,8 @@ Route::post('/login', [LoginController::class, 'authenticate']);
 Route::middleware(['auth'])->group(function () {
     Route::post('/logout', [LoginController::class, 'logout']);
     Route::get('/dashboard', [DashboardController::class, 'index']);
+    Route::get('setting', [DashboardController::class, 'setting']);
+    Route::post('setting', [DashboardController::class, 'updateProfile'])->name('setting.updateProfile');
 
     // Route Position
     Route::get('/position/{position}/delete', [PositionController::class, 'delete']);
@@ -49,6 +51,7 @@ Route::middleware(['auth'])->group(function () {
    ]);
 
    Route::get('/payroll', [PresenceController::class, 'payroll']);
+   Route::get('/payroll/pdf/{presence}', [PresenceController::class, 'payrollPdf'])->name('payroll.gaji_pdf');
    
 });
 

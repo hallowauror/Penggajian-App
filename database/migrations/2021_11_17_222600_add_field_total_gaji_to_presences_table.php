@@ -14,7 +14,10 @@ class AddFieldTotalGajiToPresencesTable extends Migration
     public function up()
     {
         Schema::table('presences', function (Blueprint $table) {
-            $table->integer('total_gaji')->after('periode');
+            $table->integer('uang_kehadiran')->after('periode');
+            $table->integer('uang_lebih_jam')->after('uang_kehadiran');
+            $table->integer('uang_insentif')->after('uang_lebih_jam');
+            $table->integer('total_gaji')->after('employee_id');
         });
     }
 
@@ -27,6 +30,9 @@ class AddFieldTotalGajiToPresencesTable extends Migration
     {
         Schema::table('presences', function (Blueprint $table) {
             $table->dropColumn('total_gaji');
+            $table->dropColumn('uang_kehadiran');
+            $table->dropColumn('uang_lebih_jam');
+            $table->dropColumn('uang_insentif');
         });
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Presence;
 use App\Models\Employee;
+use PDF;
 
 class PresenceController extends Controller
 {
@@ -47,16 +48,19 @@ class PresenceController extends Controller
             
             $kehadiran = $request->hadir * 40000;
             $lebih = $request->lebih_jam * 10000;
-            $insen = $request->insentif * 10000;
+            $insentif = $request->insentif * 10000;
             
 
-            $total = $kehadiran + $lebih + $insen + $gapok + $tunjangan + $masa_kerja;
+            $total = $kehadiran + $lebih + $insentif + $gapok + $tunjangan + $masa_kerja;
             
             $presences = Presence::create([
                 'hadir' => $request->hadir,
                 'lebih_jam' => $request->lebih_jam,
                 'insentif' => $request->insentif,
                 'periode' => $request->periode,
+                'uang_kehadiran' => $kehadiran,
+                'uang_lebih_jam' => $lebih,
+                'uang_insentif' => $insentif,
                 'employee_id' => $request->employee_id,
                 'total_gaji' => $total
             ]);
@@ -93,16 +97,19 @@ class PresenceController extends Controller
             
             $kehadiran = $request->hadir * 40000;
             $lebih = $request->lebih_jam * 10000;
-            $insen = $request->insentif * 10000;
+            $insentif = $request->insentif * 10000;
             
 
-            $total = $kehadiran + $lebih + $insen + $gapok + $tunjangan + $masa_kerja;
+            $total = $kehadiran + $lebih + $insentif + $gapok + $tunjangan + $masa_kerja;
 
             $presence->update([
                 'hadir' => $request->hadir,
                 'lebih_jam' => $request->lebih_jam,
                 'insentif' => $request->insentif,
                 'periode' => $request->periode,
+                'uang_kehadiran' => $kehadiran,
+                'uang_lebih_jam' => $lebih,
+                'uang_insentif' => $insentif,
                 'employee_id' => $request->employee_id,
                 'total_gaji' => $total
             ]);
@@ -125,5 +132,14 @@ class PresenceController extends Controller
             'employee' => Employee::with('position')->get(),
             'presence' => Presence::with('employee.position')->orderBy('created_at', 'DESC')->get()
         ]);
+    }
+
+    public function payrollPdf(Presence $presence)
+    {
+        $presence = Presence::with('employee.position')->where('id', $presence->id)->first();
+
+        $pdf = PDF::loadView('payroll.pdf', compact('presence'));
+
+        return $pdf->stream();
     }
 }

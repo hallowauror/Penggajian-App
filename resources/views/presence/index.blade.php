@@ -97,7 +97,7 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ ucFirst($pre->employee->nama) }}</td>
-                            <td>{{ $pre->periode->format('F - Y') }}</td>
+                            <td>{{ $pre->periode->isoFormat('MMMM - Y') }}</td>
                             <td>
                                 <a href="#" class="btn btn-info" data-toggle="modal" data-target="#modalShow{{$pre->id}}" data-id="{{ $pre->id }}">
                                     <span class="icon text-white-100">
@@ -155,7 +155,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="">Periode</label>
-                                                        <input type="text" name="periode" value="{{ $pre->periode->format('F - Y') }}" placeholder="Periode Kehadiran" class="form-control" required readonly>
+                                                        <input type="text" name="periode" value="{{ $pre->periode->isoFormat('MMMM - Y') }}" placeholder="Periode Kehadiran" class="form-control" required readonly>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">

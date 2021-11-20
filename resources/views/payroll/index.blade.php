@@ -45,11 +45,17 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ ucFirst($pre->employee->nama) }}</td>
                             <td>{{ ucFirst($pre->employee->position->jabatan) }}</td>
-                            <td>{{ $pre->periode->format('F - Y') }}</td>
+                            <td>{{ $pre->periode->isoFormat('MMMM - Y') }}</td>
                             <td>
                                 <a href="#" class="btn btn-info" data-toggle="modal" data-target="#modalShow{{$pre->id}}" data-id="{{ $pre->id }}">
                                     <span class="icon text-white-100">
                                         <i class="fas fa-info"></i>
+                                    </span>
+                                </a>
+
+                                <a href="{{ route('payroll.gaji_pdf', $pre->id) }}" class="btn btn-warning" data-id="{{ $pre->id }}">
+                                    <span class="icon text-white-100">
+                                        <i class="fas fa-eye"></i>
                                     </span>
                                 </a>
                             </td>
@@ -79,15 +85,15 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="">Transport & Makan (Rp. 40.000)</label>
-                                                        <input type="number" min="0" max="31" value="{{ $pre->hadir  * 40000 }}" name="hadir" placeholder="Jumlah Hadir" class="form-control" required readonly>
+                                                        <input type="text" value="Rp. {{ number_format($pre->uang_kehadiran) }}" name="uang_kehadiran" placeholder="Total Uang Kehadiran" class="form-control" required readonly>
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="">Lebih Jam Mengajar (Rp. 10.000)</label>
-                                                        <input type="number" min="0" value="{{ $pre->lebih_jam * 10000 }}" name="lebih_jam" placeholder="Lebih Jam Mengajar" class="form-control" required readonly>
+                                                        <input type="text" value="Rp. {{ number_format($pre->uang_lebih_jam) }}" name="uang_lebih_jam" placeholder="Total Uang Lebih Jam Mengajar" class="form-control" required readonly>
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="">Insentif Kehadiran (Rp. 10.000)</label>
-                                                        <input type="number" min="0" max="31" value="{{ $pre->insentif * 10000 }}" name="insentif" placeholder="Insentif Kehadiran" class="form-control" required readonly>
+                                                        <input type="text" value="Rp. {{ number_format($pre->uang_insentif) }}" name="uang_insentif" placeholder="Total Uang Insentif Kehadiran" class="form-control" required readonly>
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="">Masa Kerja > 2 Tahun (Rp. 150.000)</label>
@@ -107,11 +113,11 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="">Periode</label>
-                                                        <input type="text" name="periode" value="{{ $pre->periode->format('F - Y') }}" placeholder="Periode Kehadiran" class="form-control" required readonly>
+                                                        <input type="text" name="periode" value="{{ $pre->periode->isoFormat('MMMM - Y') }}" placeholder="Periode Kehadiran" class="form-control" required readonly>
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="">Total Gaji</label>
-                                                        <input type="text" name="total_gjai" value="{{ number_format($pre->total_gaji) }}" placeholder="Total Gaji" class="form-control" required readonly>
+                                                        <input type="text" name="total_gjai" value="Rp. {{ number_format($pre->total_gaji) }}" placeholder="Total Gaji" class="form-control" required readonly>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
@@ -129,28 +135,4 @@
         </div>
     </div>
 </div>
-@endsection
-
-@section('js')
-    <script>
-        $('.delete-data').click(function(){
-            const id_presence = $(this).attr('data-id');
-            swal({
-            title: "Yakin Ingin Menghapus Data?",
-            text: "Data yang sudah dihapus tidak dapat dikembalikan!",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-            })
-            .then((willDelete) => {
-            if (willDelete) {
-                window.location = "/presence/"+id_presence+"/delete",
-                swal("Data berhasil dihapus!", {
-                icon: "success",
-                });
-            }
-            });
-        });
-
-    </script>
 @endsection
